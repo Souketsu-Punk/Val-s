@@ -1,46 +1,40 @@
-"use client";
+'use client'
+import { useEffect, useState } from 'react'
+import confetti from 'canvas-confetti'
 
-import { useEffect } from "react";
-import Container from "../../../components/Container";
-import Card from "../../../components/Card";
-import Button from "../../../components/Button";
+interface Valentine {
+  from: string
+  to: string
+  anonymous: boolean
+}
 
-export default async function Valentine({ params }: any) {
-  const res = await fetch(`/api/get?id=${params.id}`);
-  const valentine = await res.json();
+interface PageProps {
+  params: { id: string }
+}
 
-  async function respond(response: string) {
-    await fetch("/api/respond", {
-      method: "POST",
-      body: JSON.stringify({ id: params.id, response })
-    });
+export default function ResultPage({ params }: PageProps) {
+  const [valentine, setValentine] = useState<Valentine | null>(null)
 
-    if (response === "yes") {
-      import("canvas-confetti").then(c =>
-        c.default({ spread: 80, particleCount: 120 })
-      );
+  useEffect(() => {
+    async function fetchValentine() {
+      const res = await fetch(`/api/get-valentine/${params.id}`)
+      const data = await res.json()
+      setValentine(data)
+
+      // Trigger confetti
+      confetti({ particleCount: 100, spread: 70 })
     }
 
-    setTimeout(() => {
-      window.location.href = `/result/${params.id}`;
-    }, 800);
-  }
+    fetchValentine()
+  }, [params.id])
+
+  if (!valentine) return <p>Loading...</p>
 
   return (
-    <Container>
-      <Card>
-        <h2>
-          {valentine.anonymous
-            ? "Someone asked you 💌"
-            : `${valentine.senderName || "Someone"} asked you 💌`}
-        </h2>
-
-        <p>{valentine.message}</p>
-
-        <Button onClick={() => respond("yes")}>Yes 💖</Button>
-        <Button onClick={() => respond("maybe")}>Maybe 😌</Button>
-        <Button onClick={() => respond("no")}>No 🫶</Button>
-      </Card>
-    </Container>
-  );
+    <div className="valentine-page">
+      <h1>💌 A Valentine for {valentine.to}</h1>
+      <p>From: {valentine.anonymous ? 'Anonymous' : valentine.from}</p>
+      <div className="hearts-bg"></div> {/* Floating hearts component */}
+    </div>
+  )
 }
