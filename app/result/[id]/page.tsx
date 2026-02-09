@@ -1,4 +1,4 @@
-import { getValentine } from "@/lib/db";
+import { getValentine } from "../../../lib/db";
 import Container from "../../../components/Container"
 import Card from "../../../components/Card";
 

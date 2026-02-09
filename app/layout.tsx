@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/global.css";
 import FloatingHearts from "../components/FloatingHearts";
 
 export const metadata = {

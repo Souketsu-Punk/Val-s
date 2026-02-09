@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createValentine } from "@/lib/db";
+import { createValentine } from "../../../lib/db";
 import { randomUUID } from "crypto";
 
 export async function POST(req: Request) {
