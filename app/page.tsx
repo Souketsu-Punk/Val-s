@@ -1,3 +1,4 @@
+'use client';
 export const dynamic = "force-dynamic";
 import Container from "../components/Container";
 import Card from "../components/Card";

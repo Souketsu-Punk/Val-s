@@ -1,4 +1,12 @@
-export default function Card({ children }: { children: React.ReactNode }) {
+'use client';
+
+import React from 'react';
+
+interface CardProps {
+  children: React.ReactNode;
+}
+
+export default function Card({ children }: CardProps) {
   return (
     <div
       style={{
@@ -12,10 +20,10 @@ export default function Card({ children }: { children: React.ReactNode }) {
         margin: "20px auto",
         fontFamily: "'Comic Neue', cursive",
         position: "relative",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
-      {/* optional floating heart accents */}
+      {/* optional floating heart accent */}
       <div
         style={{
           position: "absolute",
@@ -26,7 +34,7 @@ export default function Card({ children }: { children: React.ReactNode }) {
           borderRadius: "50% 50% 50% 50%",
           top: "-10px",
           right: "-10px",
-          opacity: 0.3
+          opacity: 0.3,
         }}
       />
       {children}
