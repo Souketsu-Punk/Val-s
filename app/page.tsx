@@ -1,6 +1,6 @@
-import Container from "@/components/Container";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
+import Container from "../components/Container";
+import Card from "../components/Card";
+import Button from "../components/Button";
 import Link from "next/link";
 
 export default function Home() {

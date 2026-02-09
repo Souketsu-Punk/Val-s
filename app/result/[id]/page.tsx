@@ -1,6 +1,6 @@
 import { getValentine } from "@/lib/db";
-import Container from "@/components/Container";
-import Card from "@/components/Card";
+import Container from "../../../components/Container"
+import Card from "../../../components/Card";
 
 export default function Result({ params }: { params: { id: string } }) {
   const valentine = getValentine(params.id);

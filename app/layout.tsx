@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import FloatingHearts from "@/components/FloatingHearts";
+import FloatingHearts from "../components/FloatingHearts";
 
 export const metadata = {
   title: "Ask Someone to Be Your Valentine 💌",

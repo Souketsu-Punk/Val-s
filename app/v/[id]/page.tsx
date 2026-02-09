@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import Container from "@/components/Container";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
+import Container from "../../../components/Container";
+import Card from "../../../components/Card";
+import Button from "../../../components/Button";
 
 export default async function Valentine({ params }: any) {
   const res = await fetch(`/api/get?id=${params.id}`);
