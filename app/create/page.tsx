@@ -92,7 +92,7 @@ export default function Create() {
             checked={askValentine}
             onChange={(e) => setAskValentine(e.target.checked)}
           />{" "}
-          Ask them to be your Valentine?
+          Ask them to be your Valentine? Feel free to edit the message to your liking
         </label>
 
         {askValentine && (
