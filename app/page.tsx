@@ -1,9 +1,9 @@
+export const dynamic = "force-dynamic";
 import Container from "../components/Container";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
