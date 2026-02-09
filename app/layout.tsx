@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import FloatingHearts from "@/components/FloatingHearts";
 
 export const metadata = {
   title: "Ask Someone to Be Your Valentine 💌",
@@ -12,7 +13,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <FloatingHearts />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
