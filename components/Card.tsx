@@ -23,20 +23,6 @@ export default function Card({ children }: CardProps) {
         overflow: "hidden",
       }}
     >
-      {/* optional floating heart accent */}
-      <div
-        style={{
-          position: "absolute",
-          width: "20px",
-          height: "20px",
-          backgroundColor: "#ff6b81",
-          transform: "rotate(45deg)",
-          borderRadius: "50% 50% 50% 50%",
-          top: "-10px",
-          right: "-10px",
-          opacity: 0.3,
-        }}
-      />
       {children}
     </div>
   );
