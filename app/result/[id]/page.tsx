@@ -1,17 +1,26 @@
-import { getValentine } from "../../../lib/db";
-import Container from "../../../components/Container"
-import Card from "../../../components/Card";
+'use client';
+import { useEffect, useState } from "react";
+import confetti from "canvas-confetti";
 
-export default function Result({ params }: { params: { id: string } }) {
-  const valentine = getValentine(params.id);
-  if (!valentine) return <p>Not found</p>;
+export default function ResultPage({ params }: { params: { id: string } }) {
+  const [valentine, setValentine] = useState<any>(null);
+
+  useEffect(() => {
+    fetch(`/api/get-valentine/${params.id}`)
+      .then(res => res.json())
+      .then(data => {
+        setValentine(data);
+        confetti({ particleCount: 150, spread: 80 });
+      });
+  }, [params.id]);
+
+  if (!valentine) return <p>Loading…</p>;
+  if (valentine.error) return <p>{valentine.error}</p>;
 
   return (
-    <Container>
-      <Card>
-        <h2>Response</h2>
-        <p>{valentine.response ?? "No response yet"}</p>
-      </Card>
-    </Container>
+    <div>
+      <h1>💖 {valentine.to}'s Valentine</h1>
+      <p>From: {valentine.anonymous ? "Anonymous" : valentine.from}</p>
+    </div>
   );
 }
