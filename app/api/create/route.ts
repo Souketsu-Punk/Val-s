@@ -3,7 +3,7 @@ import { redis } from '@/lib/redis'
 
 export async function POST(req: NextRequest) {
   try {
-    const { from, to, anonymous } = await req.json()
+    const { from, to, message,anonymous } = await req.json()
 
     if (!to || to.trim() === '') {
       return NextResponse.json({ error: 'Recipient required' }, { status: 400 })
@@ -17,10 +17,12 @@ export async function POST(req: NextRequest) {
       {
         from: from || 'Anonymous',
         to,
+        message,
+        askValentine: true,
         anonymous: !!anonymous,
         createdAt: Date.now(),
       },
-      { ex: 60 * 60 * 72 } // 72 hours in seconds
+      { ex: 60 * 60 * 72 } // 72 hours
     )
 
     return NextResponse.json({ id })

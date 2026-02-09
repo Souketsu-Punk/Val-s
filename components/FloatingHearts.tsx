@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect } from "react";
 import "../styles/hearts.css";
@@ -15,21 +15,25 @@ export default function FloatingHearts() {
       // random horizontal position
       heart.style.left = Math.random() * 100 + "vw";
 
+      // random vertical start position
+      heart.style.top = Math.random() * 100 + "vh";
+
       // random size
       const size = 12 + Math.random() * 18;
       heart.style.width = `${size}px`;
       heart.style.height = `${size}px`;
 
       // random animation duration
-      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      const duration = 20 + Math.random() * 40;
+      heart.style.animationDuration = `${duration}s`;
 
       container.appendChild(heart);
 
-      // cleanup
+      // remove heart after animation ends
       setTimeout(() => {
         heart.remove();
-      }, 12000);
-    }, 600); // heart spawn rate
+      }, duration * 1000);
+    }, 400); // faster spawn rate for more hearts
 
     return () => clearInterval(interval);
   }, []);
