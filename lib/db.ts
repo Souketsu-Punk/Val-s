@@ -1,8 +1,10 @@
-type Valentine = {
+export type Valentine = {
   id: string;
   message: string;
   senderName?: string;
+  anonymous: boolean;
   response?: "yes" | "maybe" | "no";
+  createdAt: number;
 };
 
 const store = new Map<string, Valentine>();
