@@ -12,9 +12,10 @@ export default function Create() {
   const [message, setMessage] = useState("")
   const [senderName, setSenderName] = useState("")
   const [anonymous, setAnonymous] = useState(false)
-  const [askValentine, setAskValentine] = useState(false) // NEW
+  const [askValentine, setAskValentine] = useState(false)
   const [link, setLink] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   function selectTemplate(template: string) {
     setMessage(template)
@@ -48,7 +49,9 @@ export default function Create() {
       const data = await res.json()
 
       if (data.id) {
-        setLink(`${window.location.origin}/v/${data.id}`)
+        const newLink = `${window.location.origin}/v/${data.id}`
+        setLink(newLink)
+        setCopied(false)
       } else {
         alert(data.error || "Failed to create Valentine. Try again.")
       }
@@ -57,6 +60,17 @@ export default function Create() {
       alert("Something went wrong. Try again.")
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function copyLink() {
+    if (!link) return
+    try {
+      await navigator.clipboard.writeText(link)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000) // reset after 2s
+    } catch (err) {
+      console.error("Failed to copy:", err)
     }
   }
 
@@ -72,7 +86,6 @@ export default function Create() {
           style={{ width: "100%", marginBottom: 10 }}
         />
 
-        {/* Checkbox to ask recipient to be your Valentine */}
         <label style={{ display: "block", marginBottom: 10 }}>
           <input
             type="checkbox"
@@ -82,16 +95,11 @@ export default function Create() {
           Ask them to be your Valentine?
         </label>
 
-        {/* Show templates if asking to be their Valentine */}
         {askValentine && (
           <div style={{ marginBottom: 10 }}>
             <p>Pick a template or type your own message:</p>
             {templates.map((t, i) => (
-              <Button
-                key={i}
-                onClick={() => selectTemplate(t)}
-                
-              >
+              <Button key={i} onClick={() => selectTemplate(t)}>
                 {t}
               </Button>
             ))}
@@ -128,10 +136,13 @@ export default function Create() {
         </Button>
 
         {link && (
-          <>
+          <div style={{ marginTop: 15 }}>
             <p>Share this link (expires in 72 hours):</p>
-            <code>{link}</code>
-          </>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <code style={{ wordBreak: "break-all" }}>{link}</code>
+              <Button onClick={copyLink}>{copied ? "Copied!" : "Copy"}</Button>
+            </div>
+          </div>
         )}
       </Card>
     </Container>
