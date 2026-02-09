@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 
+export const dynamic = "force-dynamic";
+
+
 export default function ResultPage({ params }: { params: { id: string } }) {
   const [valentine, setValentine] = useState<any>(null);
 

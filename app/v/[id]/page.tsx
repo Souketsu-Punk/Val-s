@@ -5,6 +5,8 @@ import confetti from 'canvas-confetti'
 import Container from '../../../components/Container'
 import Card from '../../../components/Card'
 
+export const dynamic = "force-dynamic";
+
 export default function ValentineView({ params }: { params: { id: string } }) {
   const [data, setData] = useState<any>(null)
   const [response, setResponse] = useState<string | null>(null)
