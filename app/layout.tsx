@@ -1,5 +1,6 @@
 import "../styles/global.css";
 import FloatingHearts from "../components/FloatingHearts";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "Ask Someone to Be Your Valentine 💌",
